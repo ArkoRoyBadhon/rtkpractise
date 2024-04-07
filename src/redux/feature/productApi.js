@@ -26,9 +26,15 @@ const ProductApi = api.injectEndpoints({
       providesTags: ["product"],
     }),
     getProductByCategory: builder.query({
-      query: () => ({
-        url: `/products/categories/jewelery`,
-      }),
+      query: (allParam) => {
+        console.log(allParam);
+        return {
+          url: `/products/category/${allParam?.categoriesVal}`,
+          params: {
+            limit: allParam?.limitVal || 10,
+          },
+        };
+      },
       providesTags: ["product"],
     }),
     updateProduct: builder.mutation({

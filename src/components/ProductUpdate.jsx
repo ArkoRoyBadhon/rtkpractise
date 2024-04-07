@@ -4,6 +4,8 @@ import {
   useGetProductByIdQuery,
   useUpdateProductMutation,
 } from "../redux/feature/productApi";
+import { toast } from "react-toastify";
+
 
 const ProductUpdate = () => {
   const [formData, setFormData] = useState({});
@@ -27,24 +29,27 @@ const ProductUpdate = () => {
   };
 
   if (isLoading) {
-    return <h1 className="">Loading...</h1>;
+    return <h1 className="h-[100vh] w-full customCenter">Loading...</h1>;
   }
 
   if (updateSuccess) {
     navigate("/");
+    toast("Updated SuccessFully", {
+      toastId: "update"
+    })
   }
 
   return (
-    <div>
+    <div className="w-full customCenter pt-[80px] flex-col px-[200px]">
       <Link to="/" className="bg-black text-white px-5">
         Back
       </Link>
-      <h1 className="">Update Form</h1>
-      <form onSubmit={handleSubmit}>
+      <h1 className="mt-10">Update Form</h1>
+      <form onSubmit={handleSubmit} className="border p-5 shadow-xl mt-5 w-[400px] rounded-lg">
         <div>
           <label>Title:</label>
           <input
-            className="px-3 py-2 border m-2"
+            className="px-3 py-2 border m-2 w-full"
             type="text"
             name="title"
             defaultValue={data?.title}
@@ -54,7 +59,7 @@ const ProductUpdate = () => {
         <div>
           <label>Price:</label>
           <input
-            className="px-3 py-2 border m-2"
+            className="px-3 py-2 border m-2 w-full"
             type="text"
             name="price"
             defaultValue={data?.price}
@@ -64,15 +69,17 @@ const ProductUpdate = () => {
         <div>
           <label>Description:</label>
           <textarea
-            className="px-3 py-2 border m-2"
+            className="px-3 py-2 border m-2 w-full"
             name="description"
             defaultValue={data?.description}
             onChange={handleInputChange}
           />
         </div>
-        <button className="px-5 py-2 border m-10 bg-gray-200" type="submit">
-          Update
-        </button>
+        <div className="w-full customCenter">
+          <button className="px-5 py-2 border m-10 bg-gray-200" type="submit">
+            Update
+          </button>
+        </div>
       </form>
     </div>
   );

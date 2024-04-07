@@ -4,4 +4,9 @@
 
 
 
+@layer components {
+    .customCenter {
+        @apply flex justify-center items-center;
+    }
+}
 
